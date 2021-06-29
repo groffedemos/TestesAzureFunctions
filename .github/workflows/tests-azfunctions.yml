@@ -31,7 +31,8 @@ jobs:
     - name: Executar a Function
       run: |
         cd ${{ env.CAMINHO_PROJETO_FUNCTIONAPP }}
-        nohup npx func start > ${{ env.FILE_LOG_EXECUCAO_FUNCTIONAPP }} 2>&1 &
+        #nohup npx func start > ${{ env.FILE_LOG_EXECUCAO_FUNCTIONAPP }} 2>&1 &
+        npx func start
         
     - name: Testes com curl
       run: |
