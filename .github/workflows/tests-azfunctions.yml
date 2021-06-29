@@ -8,7 +8,7 @@ on:
 
 env:
   CAMINHO_PROJETO_FUNCTIONAPP: ./FunctionAppContagem
-  FILE_LOG_EXECUCAO_FUNCTIONAPP: ./Resultado/log-execucao-functionapp.txt
+  FILE_LOG_EXECUCAO_FUNCTIONAPP: log-execucao-functionapp.txt
   
 jobs:
   build:
@@ -40,8 +40,8 @@ jobs:
     - name: Upload do log de execução da Function App como Artifact
       uses: actions/upload-artifact@v2.2.4
       env:
-        CAMINHO_RELATORIO_ERROS: ${{ env.FILE_LOG_EXECUCAO_FUNCTIONAPP }}
+        CAMINHO_LOG_EXECUCAO: ${{ env.CAMINHO_PROJETO_FUNCTIONAPP }}/${{ env.FILE_LOG_EXECUCAO_FUNCTIONAPP }}
       with:
         name: log-execucao-functionapp
-        path: ${{ env.FILE_LOG_EXECUCAO_FUNCTIONAPP }}
+        path: ${{ env.CAMINHO_LOG_EXECUCAO }}
         retention-days: 30
