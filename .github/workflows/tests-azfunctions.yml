@@ -30,8 +30,7 @@ jobs:
         dotnet --version
         dotnet build
         ls
-        #nohup npx func start > ${{ env.FILE_LOG_EXECUCAO_FUNCTIONAPP }} 2>&1 &
-        npx func start --no-build
+        nohup npx func start > ${{ env.FILE_LOG_EXECUCAO_FUNCTIONAPP }} 2>&1 &
         
     - name: Testes com curl
       run: |
