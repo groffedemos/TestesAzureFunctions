@@ -1,0 +1,37 @@
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CAMINHO_PROJETO_FUNCTIONAPP: ./FunctionAppContagem
+  FILE_LOG_EXECUCAO_FUNCTIONAPP: log-execucao-functionapp.txt
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+
+    - name: Instalar Azure Functions Core Tools v3
+      run: npm i azure-functions-core-tools@3
+
+    - name: Testar instalação - Azure Functions Core Tools v3
+      run: npx func
+
+    - name: Executar a Function
+      run: |
+        cd ${{ env.CAMINHO_PROJETO_FUNCTIONAPP }}
+        nohup npx func start > ${{ env.FILE_LOG_EXECUCAO_FUNCTIONAPP }} 2>&1 &
+        
+    - name: Testes com curl
+      run: curl http://localhost:7071/api/ValorAtual?[1-10] -w "\n"
