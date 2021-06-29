@@ -34,4 +34,6 @@ jobs:
         nohup npx func start > ${{ env.FILE_LOG_EXECUCAO_FUNCTIONAPP }} 2>&1 &
         
     - name: Testes com curl
-      run: curl http://localhost:7071/api/ValorAtual?[1-10] -w "\n"
+      run: |
+        sleep 20s
+        curl http://localhost:7071/api/ValorAtual?[1-10] -w "\n"
